@@ -13,8 +13,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../api/authorization.service";
-import { AxiosError } from "axios";
 import { enqueueSnackbar } from "notistack";
+import { AxiosError } from "axios";
 
 const RegisterBox = styled(Box)(({ theme }) => ({
   width: "100vw",

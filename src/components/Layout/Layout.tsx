@@ -51,7 +51,7 @@ const Layout = () => {
           <Button
             variant="contained"
             sx={{
-              display: Cookies.get("isLogin") === "true" ? "flex" : "none",
+              display: localStorage.getItem("isLogin") ? "none" : "flex",
             }}
             onClick={(e) => navigate("/login")}
           >
@@ -61,7 +61,7 @@ const Layout = () => {
             variant="text"
             {...bindTrigger(popupState)}
             sx={{
-              display: Cookies.get("isLogin") === "true" ? "none" : "flex",
+              display: localStorage.getItem("isLogin") ? "flex" : "none",
             }}
             endIcon={<KeyboardArrowDown />}
           >

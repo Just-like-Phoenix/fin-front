@@ -9,6 +9,7 @@ import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
 import Layout from "../components/Layout/Layout";
+import ProfilePage from "../pages/ProfilePage";
 
 const App = () => {
   const theme = createTheme(getDesignTokens(useThemeChecker() as PaletteMode));
@@ -40,6 +41,7 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LogInPage />} />

@@ -2,6 +2,8 @@ import { Logout, AccountCircle } from "@mui/icons-material";
 import { Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { PopupState, bindMenu } from "material-ui-popup-state/hooks";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../api/authorization.service";
+import Cookies from "js-cookie";
 
 const ProfileMenu = ({ popupState }: { popupState: PopupState }) => {
   const navigate = useNavigate();
@@ -16,7 +18,10 @@ const ProfileMenu = ({ popupState }: { popupState: PopupState }) => {
       }}
       {...bindMenu(popupState)}
     >
-      <MenuItem onClick={popupState.close}>
+      <MenuItem
+        onClick={popupState.close}
+        onClickCapture={(e) => navigate("/profile")}
+      >
         <ListItemIcon>
           <AccountCircle />
         </ListItemIcon>
@@ -25,7 +30,7 @@ const ProfileMenu = ({ popupState }: { popupState: PopupState }) => {
       <Divider />
       <MenuItem
         onClick={popupState.close}
-        onClickCapture={(e) => navigate("/login")}
+        onClickCapture={(e) => logout(Cookies.get("token"))}
       >
         <ListItemIcon>
           <Logout color="error" />

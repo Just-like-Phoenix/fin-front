@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SignInResponse } from "../types/authorization.type";
+import Cookies from "js-cookie";
 
 export const signIn = (email: string, password: string) => {
   return axios.post<SignInResponse>("https://localhost:7273/accounts/login", {
@@ -27,9 +28,19 @@ export const signUp = (
   });
 };
 
-export const logout = (email: string, password: string) => {
+export const logout = (token: string | undefined) => {
+  Cookies.remove("email");
+  Cookies.remove("username");
+  Cookies.remove("fisrtName");
+  Cookies.remove("lastName");
+  Cookies.remove("middleName");
+  Cookies.remove("token");
+  Cookies.remove("refreshToken");
+  localStorage.removeItem("isLogin");
+
+  const auth = "Authorization";
+
   return axios.post("https://localhost:7273/accounts/logout", {
-    email: email,
-    password: password,
+    headers: { auth: token },
   });
 };

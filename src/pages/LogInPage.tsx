@@ -48,16 +48,14 @@ const LogInPage = () => {
         console.log(response.data);
         Cookies.set("email", response.data.email, { expires: 30 });
         Cookies.set("username", response.data.username, { expires: 30 });
-        Cookies.set("fisrtName", response.data.firstName, { expires: 30 });
+        Cookies.set("firstName", response.data.firstName, { expires: 30 });
         Cookies.set("lastName", response.data.lastName, { expires: 30 });
         Cookies.set("middleName", response.data.middleName, { expires: 30 });
         Cookies.set("token", response.data.token, { expires: 0.12 });
         Cookies.set("refreshToken", response.data.refreshToken, {
           expires: 30,
         });
-        Cookies.set("isLogin", "true", {
-          expires: 30,
-        });
+        localStorage.setItem("isLogin", "true");
         navigate("/");
       })
       .catch((thrown: AxiosError) => {
