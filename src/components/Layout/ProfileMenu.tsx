@@ -4,6 +4,8 @@ import { PopupState, bindMenu } from "material-ui-popup-state/hooks";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../api/authorization.service";
 import Cookies from "js-cookie";
+import { AxiosError } from "axios";
+import { enqueueSnackbar } from "notistack";
 
 const ProfileMenu = ({ popupState }: { popupState: PopupState }) => {
   const navigate = useNavigate();
@@ -30,7 +32,28 @@ const ProfileMenu = ({ popupState }: { popupState: PopupState }) => {
       <Divider />
       <MenuItem
         onClick={popupState.close}
-        onClickCapture={(e) => logout(Cookies.get("token"))}
+        onClickCapture={(e) =>
+          logout(Cookies.get("token") as string)
+            .then((response) => {
+              navigate("/");
+            })
+            .catch((thrown: AxiosError) => {
+              console.log(thrown.response?.status);
+
+              if (thrown.response?.status === 401)
+                enqueueSnackbar(" ", { variant: "error" });
+
+              if (thrown.response?.status === 500)
+                enqueueSnackbar("Такая организация уже существует!", {
+                  variant: "error",
+                });
+
+              if (thrown.response?.status === undefined)
+                enqueueSnackbar("Сервер временно недоступен!", {
+                  variant: "error",
+                });
+            })
+        }
       >
         <ListItemIcon>
           <Logout color="error" />

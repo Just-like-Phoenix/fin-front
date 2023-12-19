@@ -55,6 +55,9 @@ const LogInPage = () => {
         Cookies.set("refreshToken", response.data.refreshToken, {
           expires: 30,
         });
+        Cookies.set("userId", response.data.userId, {
+          expires: 30,
+        });
         localStorage.setItem("isLogin", "true");
         navigate("/");
       })

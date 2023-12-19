@@ -6,4 +6,5 @@ export type SignInResponse = {
   middleName: string;
   token: string;
   refreshToken: string;
+  userId: string;
 };

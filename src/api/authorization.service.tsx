@@ -28,19 +28,24 @@ export const signUp = (
   });
 };
 
-export const logout = (token: string | undefined) => {
+export const logout = (token: string) => {
   Cookies.remove("email");
   Cookies.remove("username");
-  Cookies.remove("fisrtName");
+  Cookies.remove("firstName");
   Cookies.remove("lastName");
   Cookies.remove("middleName");
   Cookies.remove("token");
   Cookies.remove("refreshToken");
+  Cookies.remove("userId");
   localStorage.removeItem("isLogin");
 
-  const auth = "Authorization";
-
-  return axios.post("https://localhost:7273/accounts/logout", {
-    headers: { auth: token },
-  });
+  return axios.post(
+    "https://localhost:7273/accounts/logout",
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
 };
